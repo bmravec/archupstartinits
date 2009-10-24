@@ -1,0 +1,16 @@
+These are sample files for use in arch linux for the upstart init daemon.
+
+As it currently stands some paths are hard wired into the scripts so if you
+install upstart into it's own directory like /opt/upstart, the paths will have
+to be corrected.  The main example is for telinit.  Upstart ships a different
+version and the upstart version is needed for it to work correctly.
+
+It accepts a runlevel via options passed at boot time.  The default runlevel is
+3.  In that mode it starts dbus, hal, and acpid and starts tty1 and tty2.  The
+other useful option is 5.  This will start everything like 3 does, but then it
+starts gdm.
+
+All this work is still very hackish, but it shows a lot of promise for boot
+speed.  Currently just the basics work in archlinux.  If certain applications
+are not installed, disable the scripts by changing the extension.  Also some of
+the other files might have to be changed to reflect the missing script.
