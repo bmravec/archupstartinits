@@ -107,17 +107,8 @@ printsep() {
 	printf "\n${C_SEPARATOR}   ------------------------------\n"
 }
 
-stat_bkgd() {
-	printf "${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR} "
-	deltext
-	printf "   ${C_OTHER}[${C_BKGD}BKGD${C_OTHER}]${C_CLEAR} "
-}
-
-stat_busy() {
-	printf "${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR} "
-	printf "${SAVE_POSITION}"
-	deltext
-	printf "   ${C_OTHER}[${C_BUSY}BUSY${C_OTHER}]${C_CLEAR} "
+stat_start() {
+    printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR}\n"
 }
 
 stat_append() {
@@ -127,15 +118,19 @@ stat_append() {
 }
 
 stat_done() {
-#	deltext
-#	printf "   ${C_OTHER}[${C_DONE}DONE${C_OTHER}]${C_CLEAR} \n"
-  printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}Done{C_CLEAR} "
+    if ! [ ${1} = "" ]; then
+        printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR}\n"
+    else
+        printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}Done${C_CLEAR}\n"
+    fi
 }
 
 stat_fail() {
-#	deltext
-#	printf "   ${C_OTHER}[${C_FAIL}FAIL${C_OTHER}]${C_CLEAR} \n"
-  printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_FAIL}Failed{C_CLEAR} "
+    if ! [ ${1} = "" ]; then
+        printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_FAIL}${1}${C_CLEAR}\n"
+    else
+        printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_FAIL}Failed${C_CLEAR}\n"
+    fi
 }
 
 stat_die() {
