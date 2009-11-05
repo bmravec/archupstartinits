@@ -67,10 +67,16 @@ printsep() {
     printf "\n${C_SEPARATOR}   ------------------------------\n"
 }
 
-stat_append() {
-    printf "${RESTORE_POSITION}"
-    printf -- "${C_MAIN}${1}${C_CLEAR}"
-    printf "${SAVE_POSITION}"
+line_start() {
+    printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_HL} ${C_H1}${1}${C_CLEAR}"
+}
+
+line_append() {
+    printf "${C_MAIN}${1}"
+}
+
+line_end() {
+    printf "${C_CLEAR}\n"
 }
 
 stat_start() {
