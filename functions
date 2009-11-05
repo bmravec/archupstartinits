@@ -107,18 +107,18 @@ printsep() {
 	printf "\n${C_SEPARATOR}   ------------------------------\n"
 }
 
-stat_start() {
-    printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR}\n"
-}
-
 stat_append() {
 	printf "${RESTORE_POSITION}"
 	printf -- "${C_MAIN}${1}${C_CLEAR}"
 	printf "${SAVE_POSITION}"
 }
 
+stat_start() {
+    printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR}\n"
+}
+
 stat_done() {
-    if ! [ ${1} = "" ]; then
+    if ! [ "${1}" = "" ]; then
         printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}${1}${C_CLEAR}\n"
     else
         printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_MAIN}Done${C_CLEAR}\n"
@@ -126,7 +126,7 @@ stat_done() {
 }
 
 stat_fail() {
-    if ! [ ${1} = "" ]; then
+    if ! [ "${1}" = "" ]; then
         printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_FAIL}${1}${C_CLEAR}\n"
     else
         printf "${C_H1}${JOB_NAME} ${C_OTHER}${PREFIX_REG} ${C_FAIL}Failed${C_CLEAR}\n"
@@ -141,7 +141,7 @@ stat_die() {
 }
 
 status() {
-	stat_busy "$1"
+	stat_start "$1"
 	shift
 	$* >/dev/null 2>&1
 	if [ $? -eq 0 ]; then
